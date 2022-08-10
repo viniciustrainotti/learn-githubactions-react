@@ -17,7 +17,7 @@ jobs:
           node-version: '16.16.0'
       - run: npm ci
       - name: Cache node modules
-        id: cache-npm
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: ./node_modules
@@ -32,8 +32,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.16.0'
-      - name: Restaurando Cache
-        id: cache-npm
+      - name: Restore cache
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: ./node_modules
@@ -48,8 +48,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.16.0'
-      - name: Restaurando Cache
-        id: cache-npm
+      - name: Restore cache
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: ./node_modules
@@ -64,8 +64,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.16.0'
-      - name: Restaurando Cache
-        id: cache-npm
+      - name: Restore cache
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: ./node_modules
