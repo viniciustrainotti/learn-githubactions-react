@@ -39,13 +39,35 @@ jobs:
           path: ./node_modules
           key: cache-${{ hashFiles('**/package-lock.json') }}
       - run: npm run lint
-  # test:
-  #   needs: bootstrap
-  #   runs-on: ubuntu-latest
-  #   - run: npm tun test
-  # build:
-  #   needs: ['lint', 'test']
-  #   runs-on: ubuntu-latest
-
-
-  #   - run: npm run build --if-present
+  test:
+    needs: [bootstrap]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.16.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - name: Restaurando Cache
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: cache-${{ hashFiles('**/package-lock.json') }}
+      - run: npm run test
+  build:
+    needs: ['lint', 'test']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.16.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - name: Restaurando Cache
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: cache-${{ hashFiles('**/package-lock.json') }}
+      - run: npm run build --if-present
