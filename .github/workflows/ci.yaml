@@ -71,3 +71,8 @@ jobs:
           path: ./node_modules
           key: cache-${{ hashFiles('**/package-lock.json') }}
       - run: npm run build --if-present
+      - name: Archive Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-react
+          path: ./build
