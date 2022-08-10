@@ -71,6 +71,23 @@ jobs:
           path: ./node_modules
           key: cache-${{ hashFiles('**/package-lock.json') }}
       - run: npm run build --if-present
+      - name: Cache build
+        id: build
+        uses: actions/cache@v3
+        with:
+          path: ./build
+          key: build-${{ hashFiles('**/package-lock.json') }}
+  artifact:
+    needs: ['build']
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Restore cache build
+        id: build
+        uses: actions/cache@v3
+        with:
+          path: ./build
+          key: build-${{ hashFiles('**/package-lock.json') }}
       - name: Archive Build
         uses: actions/upload-artifact@v3
         with:
