@@ -20,8 +20,7 @@ jobs:
         id: cache-npm
         uses: actions/cache@v3
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          path: ./node_modules
           key: cache-${{ hashFiles('**/package-lock.json') }}
 
   lint:
@@ -34,10 +33,10 @@ jobs:
         with:
           node-version: '16.16.0'
       - name: Restaurando Cache
-        #id: cache-npm
-        uses: ./
+        id: cache-npm
+        uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ./node_modules
           key: cache-${{ hashFiles('**/package-lock.json') }}
       - run: npm run lint
   # test:
@@ -45,7 +44,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   - run: npm tun test
   # build:
-  #   needs: ['bootstrap', 'lint', 'test']
+  #   needs: ['lint', 'test']
   #   runs-on: ubuntu-latest
 
 
