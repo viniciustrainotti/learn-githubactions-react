@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.16.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - run: npm ci
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: cache-${{ hashFiles('**/package-lock.json') }}
+
+  lint:
+    needs: [bootstrap]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.16.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - name: Restaurando Cache
+        #id: cache-npm
+        uses: ./
+        with:
+          path: ~/.npm
+          key: cache-${{ hashFiles('**/package-lock.json') }}
+      - run: npm run lint
+  # test:
+  #   needs: bootstrap
+  #   runs-on: ubuntu-latest
+  #   - run: npm tun test
+  # build:
+  #   needs: ['bootstrap', 'lint', 'test']
+  #   runs-on: ubuntu-latest
+
+
+  #   - run: npm run build --if-present
