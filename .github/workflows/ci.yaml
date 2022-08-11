@@ -5,6 +5,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   bootstrap:
@@ -93,3 +94,6 @@ jobs:
         with:
           name: build-react
           path: ./build
+  dispatch:
+    needs: ['artifact']
+    uses: ./github/workflows/cd.yaml@master

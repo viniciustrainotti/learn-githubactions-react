@@ -1,0 +1,15 @@
+name: cd
+
+on:
+  workflow_call:
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-react
+      - name: Print the final result
+      - run: ls -la
