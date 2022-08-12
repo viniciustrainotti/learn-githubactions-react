@@ -7,7 +7,6 @@ name: cd
 
 jobs:
   ci:
-    name: Download artifact
     uses: ./.github/workflows/ci.yaml
   cd:
     needs: ['ci']
