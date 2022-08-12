@@ -1,10 +1,17 @@
+---
 name: cd
 
-on:
-  workflow_call:
+'on':
+  push:
+    branches: [master]
 
 jobs:
-  download:
+  ci:
+    name: Download artifact
+    uses: ./.github/workflows/ci.yml@master
+  cd:
+    needs: ['ci']
+    name: Continuos Delivery
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
