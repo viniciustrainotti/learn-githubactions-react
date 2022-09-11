@@ -45,7 +45,7 @@ jobs:
           asset_name: react-v${{ github.run_number }}.zip
           asset_content_type: application/zip
   deploy:
-    needs: ['cd']
+    needs: ['ci']
     name: Continuos Deploy
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/tags' }}

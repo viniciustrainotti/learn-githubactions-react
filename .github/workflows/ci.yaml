@@ -6,8 +6,6 @@ name: ci
     branches:
       - 'develop'
       - 'release/**'
-    tags:
-      - v*
   pull_request:
     branches:
       - 'develop'
