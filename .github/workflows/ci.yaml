@@ -3,13 +3,19 @@ name: ci
 
 'on':
   push:
-    - 'develop'
-    - 'release/**'
-  tags:
-    - v*
+    branches:
+      - 'develop'
+      - 'release/**'
+    tags:
+      - v*
   pull_request:
-    - 'develop'
-    - 'master'
+    branches:
+      - 'develop'
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
   workflow_call:
 
 jobs:
