@@ -7,7 +7,7 @@ name: cd
 
 jobs:
   ci:
-    uses: ./.github/workflows/ci.yaml@master
+    uses: ./.github/workflows/ci.yaml
   cd:
     needs: ['ci']
     name: Continuos Delivery
@@ -18,4 +18,4 @@ jobs:
         with:
           name: build-react
       - name: Print the final result
-      - run: ls -la
+        run: ls -la
