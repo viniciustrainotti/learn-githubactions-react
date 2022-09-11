@@ -2,6 +2,14 @@
 name: ci
 
 'on':
+  push:
+    - 'develop'
+    - 'release/**'
+  tags:
+    - v*
+  pull_request:
+    - 'develop'
+    - 'master'
   workflow_call:
 
 jobs:
