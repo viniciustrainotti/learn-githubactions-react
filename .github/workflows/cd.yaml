@@ -24,11 +24,21 @@ jobs:
         with:
           filename: react.zip
       - name: Create GitHub release
+        id: create-new-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.rum_number }}
+          release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: ./react.zip
+          asset_name: react-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
