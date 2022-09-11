@@ -44,3 +44,15 @@ jobs:
           asset_path: ./react.zip
           asset_name: react-v${{ github.run_number }}.zip
           asset_content_type: application/zip
+  deploy:
+    needs: ['cd']
+    name: Continuos Deploy
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/tags' }}
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-react
+      - name: Print the final result
+        run: ls -la
