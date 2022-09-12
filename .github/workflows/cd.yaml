@@ -49,7 +49,7 @@ jobs:
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: ./react.zip
-          asset_name: react-v${{ env.RELEASE_VERSION }}.zip
+          asset_name: react-${{ env.RELEASE_VERSION }}.zip
           asset_content_type: application/zip
   deploy:
     needs: ['ci']
