@@ -10,9 +10,9 @@ name: cd
 jobs:
   ci:
     uses: ./.github/workflows/ci.yaml
-  cd:
+  release:
     needs: ['ci']
-    name: Continuos Delivery
+    name: Release
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
@@ -54,7 +54,7 @@ jobs:
   deploy:
     needs: ['ci']
     environment: AWS
-    name: Continuos Deploy
+    name: Continuos Deployment
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
